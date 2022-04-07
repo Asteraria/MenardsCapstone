@@ -1,0 +1,44 @@
+---
+- name: Upgrade Switch IOS
+  hosts: switches
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    compliant_ios_version: *insert number here*
+
+  tasks:
+    - name: Gather Switch Facts
+      ios_facts:
+
+    - name: Upgrade IOS image if not Compliant
+      block:
+      - name: Send in the IOS
+        command: "scp system-image-filename.bin {{inventory_hostname}}:/system-image-filename.bin"
+
+      - name: Set Boot
+        ios_config:
+          commands:
+            - "boot system flash:system-image-filename.bin"
+
+      - name: Reload Switch
+        ios_command:
+          commands:
+            - "reload\n"
+
+      - name: Wait for reload
+        wait_for:
+          host: "{{inventory_hostname}}"
+          port: 22
+          delay: 60
+        delegate_to: localhost
+
+      when: ansible_net_version != compliant_ios_version
+
+    - name: Gather Facts for Validation
+      ios_facts:
+
+    - name: Assert that update is complete
+      assert:
+        that:
+          - compliant_ios_version == ansible_net_version
