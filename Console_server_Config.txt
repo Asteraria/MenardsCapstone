@@ -1,0 +1,119 @@
+Building configuration...
+
+Current configuration : 1445 bytes
+!
+! Last configuration change at 01:15:14 UTC Wed Apr 6 2022
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Capstone
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain name menardscap.com
+ip host R 2001 172.21.1.1
+ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+cts logging verbose
+!
+!
+license udi pid CISCO1921/K9 sn FGL2241323H
+!
+!
+username cisco password 0 cisco
+!
+redundancy
+!
+!
+ip ssh port 2001 rotary 1 127
+ip ssh version 2
+!
+!
+!
+!
+interface Loopback0
+ ip address 172.21.1.1 255.0.0.0
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+ login local
+ rotary 1
+ no exec
+ transport input ssh
+ transport output none
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+ transport output none
+!
+scheduler allocate 20000 1000
+!
+end
