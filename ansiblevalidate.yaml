@@ -1,0 +1,16 @@
+---
+- name: Validate running config of switch
+  hosts: switches
+  gather_facts: no
+  connection: network_cli
+
+  tasks: 
+    - name: compare running config with the reference file
+      ios_config:
+        diff_against: intended
+        intended_config: "{{ lookup('file', 'ios.cfg') }}"
+        match: line
+        
+        
+        
+...
