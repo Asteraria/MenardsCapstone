@@ -1,0 +1,39 @@
+---
+#check that Vlan1 is shut down
+- get_facts:
+    interface_list:
+      _mode: strict
+      list:
+        -Vlan1
+
+#check for open interfaces
+- get_interfaces_ip:
+    Loopback0:
+      ipv4:
+        10.0.0.1
+          prefix_length: 24
+    Ethernet0/1:
+      ipv4:
+        192.168.122.10
+          prefix_length: 24
+
+- get_interfaces:
+    Ethernet0/1:
+      is_up: True
+       
+
+#check for SSH key
+- get_users:
+    'cisco':
+      'sshkeys': []
+
+- ping:
+    _name: test_device
+    -kwargs:
+      destination: 192.168.122.10
+      source: 192.168.122.1
+    success:
+      packet_loss: 0
+    _mode: strict
+
+...
