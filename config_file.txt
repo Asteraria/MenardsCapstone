@@ -1,0 +1,190 @@
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$eXfs$656VoNPke.HCMGc7gKlKb1
+!
+username cisco privilege 15 password 0 cisco
+!
+!
+no aaa new-model
+switch 1 provision ws-c3750v2-48ts
+system mtu routing 1500
+ip domain-name cisco.com
+!         
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2380952704
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2380952704
+ revocation-check none
+ rsakeypair TP-self-signed-2380952704
+!
+!
+crypto pki certificate chain TP-self-signed-2380952704
+ certificate self-signed 01
+  30820250 308201B9 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32333830 39353237 3034301E 170D3933 30333031 30303031 
+  34375A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 33383039 
+  35323730 3430819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100C629 1E4CBDF4 D0220A76 5242D188 F1DD15B0 FAB44A9C A3A87669 20BB9C3F 
+  618870DB 0CF13985 CA4969E6 66D922D6 61487C0F 1C0969D2 206CE693 6951F185 
+  147F956C 7B3DFC9D 3401A7B2 52185E58 6DAB1ABC 84598A34 A0C56D5B DE0CB828 
+  2656BF11 BA869377 A8B81DD9 C7E16656 483D1E4E E51A13C1 B0557EFD FF2B0ADF 
+  F9F70203 010001A3 78307630 0F060355 1D130101 FF040530 030101FF 30230603 
+  551D1104 1C301A82 18537769 7463685F 4368616E 6765642E 63697363 6F2E636F 
+  6D301F06 03551D23 04183016 801444F7 3968FCE5 50237E03 B5AAB66D 6E98ADA5 
+  D2C9301D 0603551D 0E041604 1444F739 68FCE550 237E03B5 AAB66D6E 98ADA5D2 
+  C9300D06 092A8648 86F70D01 01040500 03818100 77DAB55F A14C704D 184B0DBD 
+  EEFBF04C 4CDE8EA1 B9BE5FA5 8F2DFCCB BC9D5952 5F8B0485 FCC61E2B 08B55E1E 
+  5D804D66 2D9AEA20 C44936A4 E644EB97 85E63787 FDC96D94 7D6540D1 B2848AD7 
+  06861240 76A02F10 584BCADF 1FF2E859 BDA3CAEA B4D16A90 5842C928 5CB49275 
+  2C524643 654E03E5 1200CB13 C25E0D0E B21CCA5D
+  quit
+!
+!
+!
+archive
+ path flash:archive
+file prompt quiet
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh time-out 60
+ip ssh version 2
+ip scp server enable
+!
+!
+interface FastEthernet1/0/1
+!
+interface FastEthernet1/0/2
+!
+interface FastEthernet1/0/3
+!
+interface FastEthernet1/0/4
+!
+interface FastEthernet1/0/5
+!
+interface FastEthernet1/0/6
+!
+interface FastEthernet1/0/7
+!
+interface FastEthernet1/0/8
+!
+interface FastEthernet1/0/9
+!
+interface FastEthernet1/0/10
+!
+interface FastEthernet1/0/11
+!
+interface FastEthernet1/0/12
+!
+interface FastEthernet1/0/13
+!
+interface FastEthernet1/0/14
+!
+interface FastEthernet1/0/15
+!
+interface FastEthernet1/0/16
+!
+interface FastEthernet1/0/17
+!
+interface FastEthernet1/0/18
+!
+interface FastEthernet1/0/19
+!
+interface FastEthernet1/0/20
+!
+interface FastEthernet1/0/21
+!
+interface FastEthernet1/0/22
+!         
+interface FastEthernet1/0/23
+!
+interface FastEthernet1/0/24
+!
+interface FastEthernet1/0/25
+!
+interface FastEthernet1/0/26
+!
+interface FastEthernet1/0/27
+!
+interface FastEthernet1/0/28
+!
+interface FastEthernet1/0/29
+!
+interface FastEthernet1/0/30
+!
+interface FastEthernet1/0/31
+!
+interface FastEthernet1/0/32
+!
+interface FastEthernet1/0/33
+!
+interface FastEthernet1/0/34
+!
+interface FastEthernet1/0/35
+!
+interface FastEthernet1/0/36
+!
+interface FastEthernet1/0/37
+!
+interface FastEthernet1/0/38
+!
+interface FastEthernet1/0/39
+!
+interface FastEthernet1/0/40
+!
+interface FastEthernet1/0/41
+!
+interface FastEthernet1/0/42
+!
+interface FastEthernet1/0/43
+!
+interface FastEthernet1/0/44
+!
+interface FastEthernet1/0/45
+!         
+interface FastEthernet1/0/46
+!
+interface FastEthernet1/0/47
+!
+interface FastEthernet1/0/48
+!
+interface GigabitEthernet1/0/1
+!
+interface GigabitEthernet1/0/2
+!
+interface GigabitEthernet1/0/3
+!
+interface GigabitEthernet1/0/4
+!
+interface Vlan1
+ ip address 10.10.10.10 255.255.255.0
+!
+ip classless
+ip http server
+ip http secure-server
+!
+!
+!         
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+end
