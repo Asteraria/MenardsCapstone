@@ -57,7 +57,7 @@
     - name: check Vlan config
       assert:
         that:
-          - "'Vlan1 is up' in (show_key_config.stdout_lines[0])"
+          - "'Vlan1 is up' in (show_vlan_config.stdout_lines[0])"
         success_msg: "Vlan 1 is up"
         fail_msg: "Vlan 1 is down."
 
