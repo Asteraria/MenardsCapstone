@@ -1,0 +1,19 @@
+---
+- name: Validate running config of switch
+  hosts: switches
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+    - name: Gather interface Facts
+      ansible.utils.cli_parse:
+        command: show interfaces
+        parser:
+            name: ansible.netcommon.pyats
+      register: pyats_show_interface
+
+    #for testing
+    - name: Show IOS Facts
+      debug:
+        msg: "{{ pyats_show_interface['parsed'] }}"
+...
