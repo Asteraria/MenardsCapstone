@@ -58,7 +58,7 @@
       assert:
         that:
           - "'Vlan1 is up' in (show_vlan_config.stdout_lines[0])"
-        success_msg: "Vlan 1 is up"
+        success_msg: "Vlan 1 is up, line protocol is up"
         fail_msg: "Vlan 1 is down."
 
 ...
