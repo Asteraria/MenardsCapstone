@@ -13,7 +13,7 @@
       register: pyats_show_interface
 
     #for testing
-    - name: Show IOS Facts
+    - name: Print the parsed show interface
       debug:
         msg: "{{ pyats_show_interface['parsed'] }}"
 ...
