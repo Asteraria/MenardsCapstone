@@ -1,0 +1,94 @@
+#Initially created by Adam Reimer
+---
+- name: Validate running config of switch
+  hosts: switches
+  gather_facts: no
+  connection: network_cli
+
+
+  tasks:
+    - name: Run a show interfaces switchport on the device
+      ios_command:
+        commands:
+          - show interfaces switchport
+
+      register: show_int_config
+
+
+    - name: Run a show crypto key mypubkey rsa on the device
+      ios_command:
+        commands:
+          - show crypto key mypubkey rsa
+
+      register: show_key_config
+
+
+    - name: Run a show interfaces vlan 1 on the device
+      ios_command:
+        commands:
+          - show interfaces vlan 1
+
+      register: show_vlan_config
+    
+
+      #for testing
+    - name: Show IOS Facts
+      debug:
+        msg: "{{ show_int_config }}"
+    
+
+    - name: check trunking config config
+      assert:
+        that:
+          - "'Administrative Mode: trunk' in (show_int_config.stdout_lines[0])"
+          - "'Operational Mode: trunk' in (show_int_config.stdout_lines[0])"
+        success_msg: "Trunk configuration found."
+        fail_msg: "Trunk configuration not found."
+
+
+    - name: check crypto key config
+      assert:
+        that:
+          - "'Key type: RSA KEYS' in (show_key_config.stdout_lines[0])"
+        success_msg: "Crypto key found"
+        fail_msg: "Crypto key not found."
+
+      - name: Run a show crypto key mypubkey rsa on the device
+      ios_command:
+        commands:
+          - show crypto key mypubkey rsa
+
+      register: show_key_config
+
+
+    - name: Run a show interfaces vlan 1 on the device
+      ios_command:
+        commands:
+          - show interfaces vlan 1
+
+      register: show_vlan_config
+    
+
+      #for testing
+    - name: Show IOS Facts
+      debug:
+        msg: "{{ show_int_config }}"
+    
+
+    - name: check trunking config config
+      assert:
+        that:
+          - "'Administrative Mode: trunk' in (show_int_config.stdout_lines[0])"
+          - "'Operational Mode: trunk' in (show_int_config.stdout_lines[0])"
+        success_msg: "Trunk configuration found."
+        fail_msg: "Trunk configuration not found."
+
+
+    - name: check Vlan config
+      assert:
+        that:
+          - "'Vlan1 is up' in (show_key_config.stdout_lines[0])"
+        success_msg: "Vlan 1 is up"
+        fail_msg: "Vlan 1 is down."
+
+...
