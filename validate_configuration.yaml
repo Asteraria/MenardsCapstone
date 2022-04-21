@@ -1,4 +1,4 @@
-#Initially created by Adam Reimer
+# Written by Adam Reimer
 ---
 - name: Validate configuration of the switch
   hosts: switches
