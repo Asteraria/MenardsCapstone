@@ -53,7 +53,6 @@
       assert:
         that:
           - "'Administrative Mode: trunk' in (show_int_config.stdout_lines[0])"
-          - "'Operational Mode: trunk' in (show_int_config.stdout_lines[0])"
         success_msg: "Trunk configuration found."
         fail_msg: "Trunk configuration not found."
 
@@ -69,7 +68,7 @@
     - name: Check if Vlan1 is up on the device.
       assert:
         that:
-          - "'Vlan1 is up, line protocol is up' in (show_vlan_config.stdout_lines[0])"
+          - "'Vlan1 is up, line protocol is up ' in (show_vlan_config.stdout_lines[0])"
         success_msg: "Vlan 1 is up."
         fail_msg: "Vlan 1 is down."
 
