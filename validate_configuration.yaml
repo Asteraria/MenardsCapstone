@@ -60,7 +60,7 @@
     - name: Check if the crypto key has been sucessfully created on the device.
       assert:
         that:
-          - "'Key type: RSA KEYS' in (show_key_config.stdout_lines[0])"
+          - "' Key Data:' in (show_key_config.stdout_lines[0])"
         success_msg: "Crypto key found"
         fail_msg: "Crypto key not found."
         
